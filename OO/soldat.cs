@@ -17,7 +17,7 @@ namespace OO
         #endregion
 
         #region properties (control des acces aux fields)
-        public string Nom { get; private set; }
+        public string Nom { get; set; }
         
         public int Vie
         {
@@ -27,14 +27,10 @@ namespace OO
             }
             private set //seul le soldat peut controller sa vie
             {
-                if (value > 0)
-                {
-                    _vie = 0;
-                }
-                else
-                {
-                    _vie = value;
-                }
+                // si il n'y a qu'une instruction après le if, on ne doit pas mettre les accolades
+                if (value > 0) _vie = 0;
+                else if (value > VieMax) _vie = VieMax;
+                else _vie = value;
             }
         }
 
@@ -45,7 +41,7 @@ namespace OO
         {
             get
             {
-                nbUnite = _vie / 10;
+                if (nbUnite > 0) nbUnite = _vie / 10;
                 return nbUnite;
             }
         }
@@ -57,13 +53,16 @@ namespace OO
         #region Methods
         public void Aie(int degat)
         {
-            //faire les degats
-            _vie = _vie - degat;
+            //faire les degats, reduit par la defense
+            int degatReduit = degat - Defense;
+            // pour ne pas avoir de degats positifs
+            if (degatReduit > 0) _vie = _vie - degatReduit;
         }
 
         public void Piew_piew(Soldat adversaire) 
         {
             //tirer sur un autre
+            if (adversaire is null) return; // gestion d'exception
             int degat = Puissance * NbUnite;
             adversaire.Aie(degat);
         }
