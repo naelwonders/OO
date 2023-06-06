@@ -9,9 +9,9 @@ namespace OO
     internal class Soldat
     {
         #region fields (espace memoire)
-        private string nom;
+        
         private int _vie = 100; // ca indique un champs privé sans fouiller dans les fichiers
-        private int nbUnite;
+        
         // pas besoin de champs pour vieMax, puissance et defence
         
         #endregion
@@ -28,7 +28,7 @@ namespace OO
             private set //seul le soldat peut controller sa vie
             {
                 // si il n'y a qu'une instruction après le if, on ne doit pas mettre les accolades
-                if (value > 0) _vie = 0;
+                if (value < 0) _vie = 0;
                 else if (value > VieMax) _vie = VieMax;
                 else _vie = value;
             }
@@ -37,13 +37,8 @@ namespace OO
         //autopropriété, pas de conditions donc on peut faire un racourcis (pas besoin de champs)
         public int VieMax {get; private set;} = 100;
 
-        public int NbUnite
-        {
-            get
-            {
-                if (nbUnite > 0) nbUnite = _vie / 10;
-                return nbUnite;
-            }
+        public int NbUnite {
+            get { return Vie / 10; }
         }
         public int Puissance { get; set; }
         public int Defense { get; set; }
@@ -56,9 +51,8 @@ namespace OO
             //faire les degats, reduit par la defense
             int degatReduit = degat - Defense;
             // pour ne pas avoir de degats positifs
-            if (degatReduit > 0) _vie = _vie - degatReduit;
+            if (degatReduit > 0) Vie -= degatReduit;
         }
-
         public void Piew_piew(Soldat adversaire) 
         {
             //tirer sur un autre

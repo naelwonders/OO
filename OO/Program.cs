@@ -6,6 +6,7 @@
         public static Random RNG = new Random(); //fait partie de system donc pas besoin d'ajouter
         static void Main(string[] args)
         {
+            Console.Clear();
             Soldat s1 = new Soldat();
             s1.Nom = "Valkyrie";
             s1.Puissance = 4;
