@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace OO
 {
-    internal class Soldat
+    internal class Soldat //internal c'est accessible que pour le projet
     {
         #region fields (espace memoire)
         
         private int _vie = 100; // ca indique un champs privé sans fouiller dans les fichiers
-        
+        public Nation nation;
         // pas besoin de champs pour vieMax, puissance et defence
-        
+
         #endregion
 
         #region properties (control des acces aux fields)
@@ -57,6 +57,7 @@ namespace OO
         {
             //tirer sur un autre
             if (adversaire is null) return; // gestion d'exception
+            if (adversaire.nation == this.nation) return;
             int degat = Puissance * NbUnite;
             adversaire.Aie(degat);
         }
