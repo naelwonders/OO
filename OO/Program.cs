@@ -60,7 +60,7 @@
             Soldat defenseur = rouge["Omega"];
             if (random_result == 1) attaquant = rouge["Omega"]; defenseur = rouge["Charlie"];
 
-            while (rouge["Charlie"].Vie > 0 && rouge["Omega"].Vie > 0)
+            while (attaquant.Vie > 0 && defenseur.Vie > 0)
             {
                 Console.WriteLine($"{attaquant.Nom} de la nation {attaquant.nation.Nom} attaque");
                 attaquant.Piew_piew(defenseur);

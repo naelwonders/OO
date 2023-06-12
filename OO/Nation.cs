@@ -71,6 +71,16 @@ namespace OO
             // pas de console.writelines dans nos classes car on ne pourra pas les utiliser dans unity (pas une console)
         }
 
+        public void Fusion(string nomBataillon1, string nomBataillon2)
+        {
+            if (nomBataillon1 is null || nomBataillon2 is null) return;
+            if (!_armee.ContainsKey(nomBataillon1) || !_armee.ContainsKey(nomBataillon2)) return; // gestion d'exeptions
+            Soldat bataillon1 = _armee[nomBataillon1];
+            Soldat bataillon2 = _armee[nomBataillon2];
+            bataillon1 += bataillon2;
+            _armee.Remove(nomBataillon2);
+        }
+
         #endregion
     }
 }
