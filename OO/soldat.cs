@@ -38,7 +38,7 @@ namespace OO
         public int VieMax {get; private set;} = 100;
 
         public int NbUnite {
-            get { return Vie / 10; }
+            get { return this.Vie / 10; }
         }
         public int Puissance { get; set; }
         public int Defense { get; set; }
@@ -61,6 +61,21 @@ namespace OO
             int degat = Puissance * NbUnite;
             adversaire.Aie(degat);
         }
+
+
+        #endregion
+
+        #region Surcharge operateur (additionner deux soldats)
+
+        public static Soldat operator +(Soldat left, Soldat right)
+        {
+            
+            left.Vie = left.Vie + right.Vie;
+            right.Vie = 0;
+
+            return left;
+        }
+
         #endregion
     }
 }
